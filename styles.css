@@ -1,57 +1,98 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
 }
 
 .container {
-    background: white;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
+    max-width: 500px;
 }
 
 h1 {
     text-align: center;
-    color: #2575fc;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 1rem;
 }
 
-label {
+.form-group label {
     display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
 }
 
-input, select, textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
 }
 
 button {
     width: 100%;
-    background-color: #2575fc;
-    color: white;
+    padding: 1rem;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    color: #fff;
     border: none;
-    padding: 10px;
-    font-size: 16px;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 0.5rem;
 }
 
 button:hover {
-    background-color: #1a5bb8;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.25rem;
+    }
+
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
 }
