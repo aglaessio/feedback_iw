@@ -73,7 +73,9 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
 
 // Função para gerar o PDF
 document.getElementById('generatePdf').addEventListener('click', function () {
-    const doc = new jspdf.jsPDF();
+    const { jsPDF } = window.jspdf; // Inicializa o jsPDF
+
+    const doc = new jsPDF();
 
     // Título do PDF
     doc.setFontSize(18);
