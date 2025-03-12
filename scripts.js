@@ -1,18 +1,24 @@
-// Inicializa o Supabase
-const supabaseUrl = 'https://seu-supabase-url.supabase.co'; // Substitua pelo seu URL do Supabase
-const supabaseKey = 'sua-chave-publica'; // Substitua pela sua chave pública do Supabase
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// Inicializa o jsPDF
+const { jsPDF } = window.jspdf;
 
 // Função para gerar o PDF
 document.getElementById('generatePdf').addEventListener('click', function () {
-    const { jsPDF } = window.jspdf; // Inicializa o jsPDF
-
     const doc = new jsPDF();
+
+    // Adiciona a logo
+    const logoUrl = "logo-light.13bb4c96.png";
+    doc.addImage(logoUrl, 'PNG', 20, 10, 40, 15); // Ajuste a posição e o tamanho da logo
 
     // Título do PDF
     doc.setFontSize(18);
-    doc.text("Formulário de Feedback", 10, 20);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(40, 40, 40);
+    doc.text("Relatório Técnico Pós Evento", 105, 20, { align: "center" });
+
+    // Linha divisória
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.5);
+    doc.line(20, 25, 190, 25);
 
     // Dados do formulário
     const formData = {
@@ -27,39 +33,34 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         "Outras Observações": document.getElementById('otherObservations').value,
     };
 
-    // Converte os dados do formulário em uma tabela
-    const data = Object.entries(formData).map(([key, value]) => [key, value]);
+    // Converte os dados do formulário em uma lista
+    const data = Object.entries(formData).map(([key, value]) => ({ key, value }));
 
-    // Adiciona a tabela ao PDF
-    doc.autoTable({
-        head: [['Campo', 'Valor']],
-        body: data,
-        startY: 30,
+    // Adiciona os dados ao PDF
+    let yPos = 40; // Posição inicial
+    data.forEach((item, index) => {
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(40, 40, 40);
+        doc.text(`${item.key}:`, 20, yPos);
+
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(80, 80, 80);
+        doc.text(item.value, 70, yPos);
+
+        yPos += 10; // Espaçamento entre os itens
     });
 
-    // Adiciona os anexos ao PDF
-    const files = document.getElementById('fileAttachments').files;
-    if (files.length > 0) {
-        doc.setFontSize(14);
-        doc.text("Anexos:", 10, doc.autoTable.previous.finalY + 10);
-
-        files.forEach((file, index) => {
-            doc.text(`${index + 1}. ${file.name}`, 10, doc.autoTable.previous.finalY + 20 + (index * 10));
-        });
-    }
+    // Rodapé do PDF (canto inferior esquerdo)
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    const footerText = `Gerado em: ${new Date().toLocaleString()}`;
+    doc.text(footerText, 20, doc.internal.pageSize.height - 10);
 
     // Abre o PDF em uma nova aba
     const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
     window.open(pdfOutput, '_blank'); // Abre o PDF em uma nova aba
 
     // Oferece a opção de download
-    doc.save('formulario_feedback.pdf');
+    doc.save('relatorio_tecnico_pos_evento.pdf');
 });
-
-function checkFileCount(input) {
-    const maxFiles = 20;
-    if (input.files.length > maxFiles) {
-        alert(`Por favor, selecione no máximo ${maxFiles} arquivos.`);
-        input.value = '';
-    }
-}
