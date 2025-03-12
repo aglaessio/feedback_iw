@@ -1,101 +1,44 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 1rem;
-}
-
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-    box-sizing: border-box;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-size: 1.5rem;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 0.5rem;
-    color: #555;
-    font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-    box-sizing: border-box;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-button {
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-    margin-top: 0.5rem;
-}
-
-button:hover {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-        max-width: 90%;
-    }
-
-    h1 {
-        font-size: 1.25rem;
-    }
-
-    .form-group label {
-        font-size: 0.85rem;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-    }
-
-    button {
-        padding: 0.75rem;
-        font-size: 0.9rem;
-    }
-}
+document.getElementById("generatePdf").addEventListener("click", function () {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString("pt-BR");
+    const formattedTime = now.toLocaleTimeString("pt-BR");
+    
+    // Cores do PDF
+    const primaryColor = [37, 117, 252]; // Azul
+    const secondaryColor = [33, 37, 41]; // Cinza escuro
+    const bgColor = [240, 240, 240]; // Cinza claro
+    
+    doc.setFillColor(...bgColor);
+    doc.rect(0, 0, 210, 297, "F"); // Fundo colorido
+    
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...primaryColor);
+    doc.text("Relatório Técnico Pós Evento", 105, 20, { align: "center" });
+    
+    let y = 30;
+    document.querySelectorAll(".form-group").forEach((group) => {
+        const label = group.querySelector("label").innerText;
+        const input = group.querySelector("input, select, textarea");
+        const value = input.value || "Não informado";
+        
+        doc.setFontSize(12);
+        doc.setTextColor(...secondaryColor);
+        doc.setFont("helvetica", "bold");
+        doc.text(label, 10, y);
+        
+        doc.setFont("helvetica", "normal");
+        doc.text(value, 10, y + 6);
+        
+        y += 12;
+    });
+    
+    doc.setFontSize(10);
+    doc.setTextColor(...secondaryColor);
+    const footerText = `Gerado em: ${formattedDate} ${formattedTime}`;
+    const textWidth = doc.getTextWidth(footerText);
+    doc.text(footerText, 200 - textWidth, 280);
+    
+    doc.save("relatorio_tecnico.pdf");
+});
