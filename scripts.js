@@ -1,6 +1,6 @@
 document.getElementById("generatePdf").addEventListener("click", function () {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
+    const doc = new jsPDF({ unit: "mm", format: "a4" });
     
     // Estilo do cabeçalho
     doc.setFont("helvetica", "bold");
@@ -13,20 +13,23 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     doc.setFont("helvetica", "normal");
     doc.setTextColor(0, 0, 0);
     
-    const formElements = document.querySelectorAll("input, select, textarea");
+    const formElements = document.querySelectorAll(".form-group");
     let y = 40;
+    const lineHeight = 8;
     
     formElements.forEach(element => {
-        if (element.value.trim() !== "") {
+        const label = element.querySelector("label").textContent;
+        const input = element.querySelector("input, select, textarea");
+        if (input && input.value.trim() !== "") {
             doc.setFont("helvetica", "bold");
-            doc.text(`${element.previousElementSibling.textContent}`, 20, y);
+            doc.text(`${label}:`, 20, y);
             doc.setFont("helvetica", "normal");
-            doc.text(`${element.value}`, 80, y);
-            y += 10;
+            doc.text(`${input.value}`, 80, y);
+            y += lineHeight;
         }
     });
     
-    // Data de Geração
+    // Data de Geração no canto inferior direito
     const date = new Date();
     const formattedDate = date.toLocaleDateString("pt-BR", {
         day: "2-digit",
@@ -37,7 +40,7 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     });
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    doc.text(`Data de Geração: ${formattedDate}`, 170, 290, { align: "right" });
+    doc.text(`Data de Geração: ${formattedDate}`, 200, 290, { align: "right" });
     
     doc.save("relatorio_evento.pdf");
 });
