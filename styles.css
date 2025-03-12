@@ -70,7 +70,44 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Estilos para dispositivos móveis */
+.report-item {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+.report-item h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.report-item p {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+.report-item ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.report-item ul li {
+    margin: 0.5rem 0;
+}
+
+.report-item ul li a {
+    color: #2575fc;
+    text-decoration: none;
+}
+
+.report-item ul li a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
     .container {
         padding: 1rem;
