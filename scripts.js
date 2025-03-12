@@ -1,98 +1,89 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 1rem;
-}
+// Inicializa o Supabase
+const supabaseUrl = 'https://seu-supabase-url.supabase.co'; // Substitua pelo seu URL do Supabase
+const supabaseKey = 'sua-chave-publica'; // Substitua pela sua chave pública do Supabase
 
-.container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 500px;
-}
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-h1 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
-    font-size: 1.5rem;
-}
+// Função para gerar o PDF
+document.getElementById('generatePdf').addEventListener('click', function () {
+    const { jsPDF } = window.jspdf; // Inicializa o jsPDF
 
-.form-group {
-    margin-bottom: 1rem;
-}
+    const doc = new jsPDF();
 
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: #555;
-    font-size: 0.9rem;
-}
+    // Configurações de estilo
+    const primaryColor = [33, 37, 41]; // Cor escura
+    const secondaryColor = [100, 100, 100]; // Cor cinza
+    const accentColor = [37, 117, 252]; // Azul moderno
 
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    color: #333;
-    box-sizing: border-box;
-}
+    // Título do PDF (centralizado)
+    doc.setFontSize(22);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...primaryColor);
+    const title = "Relatório Técnico Pós Evento";
+    const titleWidth = doc.getTextWidth(title);
+    const pageWidth = doc.internal.pageSize.getWidth();
+    doc.text(title, (pageWidth - titleWidth) / 2, 20);
 
-.form-group textarea {
-    resize: vertical;
-}
+    // Data de geração do PDF (canto superior direito)
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...secondaryColor);
+    doc.text(`Gerado em: ${formattedDate}`, pageWidth - 50, 20);
 
-button {
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #2575fc, #6a11cb);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-    margin-top: 0.5rem;
-}
+    // Dados do formulário
+    const formData = {
+        "Nome do Evento": document.getElementById('eventName').value,
+        "Nome do Técnico": document.getElementById('technicianName').value,
+        "Data e Hora de Chegada": document.getElementById('arrivalDateTime').value,
+        "Horário de Abertura da Bilheteria": document.getElementById('boxOfficeOpeningTime').value,
+        "Quantidade de Bilheterias": document.getElementById('boxOfficeCount').value,
+        "Equipamentos de Bilheteria": document.getElementById('boxOfficeEquipmentCount').value,
+        "Horário de Abertura da Portaria": document.getElementById('gateOpeningTime').value,
+        "Quantidade de Portarias": document.getElementById('gateCount').value,
+        "Equipamentos de Portaria": document.getElementById('gateEquipmentCount').value,
+        "Internet Disponibilizada": document.getElementById('internetProvided').value,
+        "Outras Observações": document.getElementById('otherObservations').value,
+    };
 
-button:hover {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    transform: translateY(-2px);
-}
+    // Adiciona os dados ao PDF
+    let yPosition = 40; // Posição inicial para os dados
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...primaryColor);
 
-@media (max-width: 480px) {
-    .container {
-        padding: 1rem;
-    }
+    Object.entries(formData).forEach(([key, value]) => {
+        doc.text(`${key}:`, 20, yPosition);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(...secondaryColor);
+        doc.text(`${value}`, 80, yPosition);
+        yPosition += 10; // Espaçamento entre linhas
+    });
 
-    h1 {
-        font-size: 1.25rem;
-    }
+    // Adiciona uma linha horizontal para separar o conteúdo
+    doc.setDrawColor(...accentColor);
+    doc.setLineWidth(0.5);
+    doc.line(20, yPosition + 5, pageWidth - 20, yPosition + 5);
 
-    .form-group label {
-        font-size: 0.85rem;
-    }
+    // Abre o PDF em uma nova aba
+    const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
+    window.open(pdfOutput, '_blank'); // Abre o PDF em uma nova aba
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 0.5rem;
-        font-size: 0.9rem;
-    }
+    // Oferece a opção de download
+    doc.save('relatorio_tecnico_pos_evento.pdf');
+});
 
-    button {
-        padding: 0.75rem;
-        font-size: 0.9rem;
+function checkFileCount(input) {
+    const maxFiles = 20;
+    if (input.files.length > maxFiles) {
+        alert(`Por favor, selecione no máximo ${maxFiles} arquivos.`);
+        input.value = '';
     }
 }
