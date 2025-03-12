@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Feedback</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Feedback</h1>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="eventName">Nome do Evento:</label>
+                <input type="text" id="eventName" name="eventName" required>
+            </div>
+            <div class="form-group">
+                <label for="technicianName">Nome do Técnico:</label>
+                <input type="text" id="technicianName" name="technicianName" required>
+            </div>
+            <div class="form-group">
+                <label for="arrivalDateTime">Data e Hora de Chegada:</label>
+                <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+            </div>
+            <div class="form-group">
+                <label for="boxOfficeOpeningTime">Horário de Abertura da Bilheteria:</label>
+                <input type="time" id="boxOfficeOpeningTime" name="boxOfficeOpeningTime" required>
+            </div>
+            <div class="form-group">
+                <label for="boxOfficeCount">Quantidade de Bilheterias:</label>
+                <input type="number" id="boxOfficeCount" name="boxOfficeCount" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="boxOfficeEquipmentCount">Equipamentos de Bilheteria:</label>
+                <input type="number" id="boxOfficeEquipmentCount" name="boxOfficeEquipmentCount" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="gateOpeningTime">Horário de Abertura da Portaria:</label>
+                <input type="time" id="gateOpeningTime" name="gateOpeningTime" required>
+            </div>
+            <div class="form-group">
+                <label for="gateCount">Quantidade de Portarias:</label>
+                <input type="number" id="gateCount" name="gateCount" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="gateEquipmentCount">Equipamentos de Portaria:</label>
+                <input type="number" id="gateEquipmentCount" name="gateEquipmentCount" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="internetProvided">Internet Disponibilizada:</label>
+                <select id="internetProvided" name="internetProvided" required>
+                    <option value="Sim">Sim</option>
+                    <option value="Não">Não</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="otherObservations">Outras Observações:</label>
+                <textarea id="otherObservations" name="otherObservations" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="fileAttachments">Anexar Fotos e Arquivos (Máx. 20):</label>
+                <input type="file" id="fileAttachments" name="fileAttachments" multiple accept="image/*, .pdf, .doc, .docx" onchange="checkFileCount(this)">
+            </div>
+            <button type="submit">Enviar Relatório</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="module" src="scripts.js"></script>
+</body>
+</html>
