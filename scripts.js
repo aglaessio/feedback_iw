@@ -1,7 +1,7 @@
 import supabase from './supabase-config.js';
 
 // Inicializa o EmailJS
-emailjs.init('SEU_USER_ID_DO_EMAILJS'); // Substitua pelo seu User ID do EmailJS
+emailjs.init('zqK9tEVCcUHGTfGnW'); // Substitua pelo seu User ID do EmailJS
 
 document.getElementById('feedbackForm').addEventListener('submit', async function (event) {
     event.preventDefault();
@@ -55,7 +55,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
             link: viewLink
         };
 
-        await emailjs.send('SEU_SERVICE_ID_DO_EMAILJS', 'SEU_TEMPLATE_ID_DO_EMAILJS', emailParams); // Substitua pelos seus IDs do EmailJS
+        await emailjs.send('service_c9d89ee', 'template_owuaduf', emailParams); // Substitua pelos seus IDs do EmailJS
         console.log("E-mail enviado com sucesso!");
 
         alert('Relatório enviado com sucesso! Um link de visualização foi enviado para o e-mail.');
