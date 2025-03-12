@@ -62,14 +62,17 @@
                 <label for="fileAttachments">Anexar Fotos e Arquivos (Máx. 20):</label>
                 <input type="file" id="fileAttachments" name="fileAttachments" multiple accept="image/*, .pdf, .doc, .docx" onchange="checkFileCount(this)">
             </div>
-            <button type="submit">Enviar Relatório</button>
             <button type="button" id="generatePdf">Gerar PDF</button>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Inclusão das bibliotecas jsPDF e jsPDF-AutoTable -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.24/jspdf.plugin.autotable.min.js"></script>
+
+    <!-- Outros scripts do projeto -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="module" src="scripts.js"></script>
 </body>
 </html>
