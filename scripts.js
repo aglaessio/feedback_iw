@@ -1,7 +1,8 @@
-import supabase from './supabase-config.js';
+// Inicializa o Supabase
+const supabaseUrl = 'https://seu-supabase-url.supabase.co'; // Substitua pelo seu URL do Supabase
+const supabaseKey = 'sua-chave-publica'; // Substitua pela sua chave pública do Supabase
 
-// Inicializa o EmailJS
-emailjs.init('SEU_USER_ID_DO_EMAILJS'); // Substitua pelo seu User ID do EmailJS
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 // Função para gerar o PDF
 document.getElementById('generatePdf').addEventListener('click', function () {
