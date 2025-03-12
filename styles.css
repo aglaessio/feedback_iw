@@ -17,6 +17,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 500px;
+    margin: 1rem;
 }
 
 h1 {
@@ -51,6 +52,7 @@ h1 {
 
 .form-group textarea {
     resize: vertical;
+    min-height: 100px;
 }
 
 button {
@@ -71,9 +73,15 @@ button:hover {
     transform: translateY(-2px);
 }
 
-@media (max-width: 480px) {
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
     .container {
         padding: 1rem;
+        margin: 0.5rem;
     }
 
     h1 {
@@ -94,5 +102,27 @@ button:hover {
     button {
         padding: 0.75rem;
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.1rem;
+    }
+
+    .form-group label {
+        font-size: 0.8rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.4rem;
+        font-size: 0.85rem;
+    }
+
+    button {
+        padding: 0.6rem;
+        font-size: 0.85rem;
     }
 }
