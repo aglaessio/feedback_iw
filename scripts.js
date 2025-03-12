@@ -1,62 +1,98 @@
-// Inicializa o jsPDF
-const { jsPDF } = window.jspdf;
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+}
 
-// Função para gerar o PDF
-document.getElementById('generatePdf').addEventListener('click', function () {
-    const doc = new jsPDF();
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+}
 
-    // Título do PDF
-    doc.setFontSize(18);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(40, 40, 40);
-    doc.text("Relatório Técnico Pós Evento", 105, 20, { align: "center" });
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.5rem;
+}
 
-    // Linha divisória
-    doc.setDrawColor(200, 200, 200);
-    doc.setLineWidth(0.5);
-    doc.line(20, 25, 190, 25);
+.form-group {
+    margin-bottom: 1rem;
+}
 
-    // Dados do formulário
-    const formData = {
-        "Nome do Evento": document.getElementById('eventName').value,
-        "Nome do Técnico": document.getElementById('technicianName').value,
-        "Data e Hora de Chegada": document.getElementById('arrivalDateTime').value,
-        "Horário de Abertura da Bilheteria": document.getElementById('boxOfficeOpeningTime').value,
-        "Quantidade de Bilheterias": document.getElementById('boxOfficeCount').value,
-        "Horário de Abertura da Portaria": document.getElementById('gateOpeningTime').value,
-        "Quantidade de Portarias": document.getElementById('gateCount').value,
-        "Internet Disponibilizada": document.getElementById('internetProvided').value,
-        "Outras Observações": document.getElementById('otherObservations').value,
-    };
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
 
-    // Converte os dados do formulário em uma lista
-    const data = Object.entries(formData).map(([key, value]) => ({ key, value }));
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+}
 
-    // Adiciona os dados ao PDF
-    let yPos = 40; // Posição inicial
-    data.forEach((item, index) => {
-        doc.setFontSize(12);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(40, 40, 40);
-        doc.text(`${item.key}:`, 20, yPos);
+.form-group textarea {
+    resize: vertical;
+}
 
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(80, 80, 80);
-        doc.text(item.value, 70, yPos);
+button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 0.5rem;
+}
 
-        yPos += 10; // Espaçamento entre os itens
-    });
+button:hover {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    transform: translateY(-2px);
+}
 
-    // Rodapé do PDF (canto inferior esquerdo)
-    doc.setFontSize(10);
-    doc.setTextColor(100, 100, 100);
-    const footerText = `Gerado em: ${new Date().toLocaleString()}`;
-    doc.text(footerText, 20, doc.internal.pageSize.height - 10);
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
 
-    // Abre o PDF em uma nova aba
-    const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
-    window.open(pdfOutput, '_blank'); // Abre o PDF em uma nova aba
+    h1 {
+        font-size: 1.25rem;
+    }
 
-    // Oferece a opção de download
-    doc.save('relatorio_tecnico_pos_evento.pdf');
-});
+    .form-group label {
+        font-size: 0.85rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
