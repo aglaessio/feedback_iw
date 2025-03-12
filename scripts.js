@@ -15,8 +15,8 @@ document.getElementById('generatePdf').addEventListener('click', function () {
     const secondaryColor = [100, 100, 100]; // Cor cinza
     const accentColor = [37, 117, 252]; // Azul moderno
 
-    // Define a fonte como "Courier" (máquina de escrever)
-    doc.setFont("courier");
+    // Define a fonte como "Roboto" (igual ao formulário)
+    doc.setFont("Roboto");
 
     // Título do PDF (centralizado)
     doc.setFontSize(22);
