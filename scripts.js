@@ -36,7 +36,9 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     
     doc.setFontSize(10);
     doc.setTextColor(...secondaryColor);
-    doc.text(`Data de Geração: ${formattedDate} ${formattedTime}`, 160, 280);
+    const footerText = `Gerado em: ${formattedDate} ${formattedTime}`;
+    const textWidth = doc.getTextWidth(footerText);
+    doc.text(footerText, 200 - textWidth, 280);
     
     doc.save("relatorio_tecnico.pdf");
 });
