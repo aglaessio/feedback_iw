@@ -113,7 +113,11 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         });
     }
 
-    // Salva o PDF
+    // Abre o PDF em uma nova aba
+    const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
+    window.open(pdfOutput, '_blank'); // Abre o PDF em uma nova aba
+
+    // Oferece a opção de download
     doc.save('formulario_feedback.pdf');
 });
 
