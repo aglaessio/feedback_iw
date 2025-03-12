@@ -29,19 +29,20 @@ document.getElementById("generatePdf").addEventListener("click", function () {
         y += 12;
     });
     
-    // Adiciona "Gerado em:" no canto inferior esquerdo
+    // Adiciona "Gerado em:" no canto inferior direito
     doc.setFontSize(10);
     const text = `Gerado em: ${formattedDate} ${formattedTime}`;
     const textWidth = doc.getTextWidth(text);
     const pageWidth = doc.internal.pageSize.getWidth();
     
-    // Verifica se o texto ultrapassa a margem e ajusta a posição
+    // Verifica se o texto ultrapassa a margem e ajusta o tamanho da fonte
     if (textWidth > pageWidth - 20) {
         doc.setFontSize(8); // Reduz o tamanho da fonte se necessário
     }
     
-    // Posiciona o texto no canto inferior esquerdo
-    doc.text(text, 10, 280); // 10 é a margem esquerda, 280 é a posição Y próxima ao rodapé
+    // Posiciona o texto no canto inferior direito
+    const xPosition = pageWidth - 10 - doc.getTextWidth(text); // 10 é a margem direita
+    doc.text(text, xPosition, 280); // 280 é a posição Y próxima ao rodapé
     
     // Salva o PDF
     doc.save("relatorio_tecnico.pdf");
