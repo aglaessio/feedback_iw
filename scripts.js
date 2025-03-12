@@ -24,20 +24,6 @@ document.getElementById('generatePdf').addEventListener('click', function () {
     const pageWidth = doc.internal.pageSize.getWidth();
     doc.text(title, (pageWidth - titleWidth) / 2, 20);
 
-    // Data de geração do PDF (canto superior direito)
-    const date = new Date();
-    const formattedDate = date.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    });
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(...secondaryColor);
-    doc.text(`Gerado em: ${formattedDate}`, pageWidth - 50, 20);
-
     // Dados do formulário
     const formData = {
         "Nome do Evento": document.getElementById('eventName').value,
@@ -67,10 +53,19 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         yPosition += 10; // Espaçamento entre linhas
     });
 
-    // Adiciona uma linha horizontal para separar o conteúdo
-    doc.setDrawColor(...accentColor);
-    doc.setLineWidth(0.5);
-    doc.line(20, yPosition + 5, pageWidth - 20, yPosition + 5);
+    // Adiciona a data de geração no canto inferior direito
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(...secondaryColor);
+    doc.text(`Gerado em: ${formattedDate}`, pageWidth - 50, doc.internal.pageSize.getHeight() - 10);
 
     // Abre o PDF em uma nova aba
     const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
