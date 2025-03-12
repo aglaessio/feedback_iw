@@ -1,18 +1,20 @@
-// Inicializa o Supabase
-const supabaseUrl = 'https://seu-supabase-url.supabase.co'; // Substitua pelo seu URL do Supabase
-const supabaseKey = 'sua-chave-publica'; // Substitua pela sua chave pública do Supabase
-
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// Inicializa o jsPDF
+const { jsPDF } = window.jspdf;
 
 // Função para gerar o PDF
 document.getElementById('generatePdf').addEventListener('click', function () {
-    const { jsPDF } = window.jspdf; // Inicializa o jsPDF
-
     const doc = new jsPDF();
 
-    // Título do PDF
+    // Cabeçalho do PDF
     doc.setFontSize(18);
-    doc.text("Formulário de Feedback", 10, 20);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(40, 40, 40);
+    doc.text("Relatório de Feedback", 105, 20, { align: "center" });
+
+    // Linha divisória
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.5);
+    doc.line(20, 25, 190, 25);
 
     // Dados do formulário
     const formData = {
@@ -35,31 +37,30 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         head: [['Campo', 'Valor']],
         body: data,
         startY: 30,
+        theme: "striped", // Tema da tabela
+        headStyles: {
+            fillColor: [40, 40, 40], // Cor de fundo do cabeçalho
+            textColor: [255, 255, 255], // Cor do texto do cabeçalho
+            fontStyle: "bold", // Fonte em negrito
+        },
+        bodyStyles: {
+            textColor: [40, 40, 40], // Cor do texto do corpo
+        },
+        alternateRowStyles: {
+            fillColor: [245, 245, 245], // Cor de fundo das linhas alternadas
+        },
+        margin: { top: 30 }, // Margem superior
     });
 
-    // Adiciona os anexos ao PDF
-    const files = document.getElementById('fileAttachments').files;
-    if (files.length > 0) {
-        doc.setFontSize(14);
-        doc.text("Anexos:", 10, doc.autoTable.previous.finalY + 10);
-
-        files.forEach((file, index) => {
-            doc.text(`${index + 1}. ${file.name}`, 10, doc.autoTable.previous.finalY + 20 + (index * 10));
-        });
-    }
+    // Rodapé do PDF
+    doc.setFontSize(10);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Gerado em: " + new Date().toLocaleString(), 20, doc.autoTable.previous.finalY + 10);
 
     // Abre o PDF em uma nova aba
     const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
     window.open(pdfOutput, '_blank'); // Abre o PDF em uma nova aba
 
     // Oferece a opção de download
-    doc.save('formulario_feedback.pdf');
+    doc.save('relatorio_feedback.pdf');
 });
-
-function checkFileCount(input) {
-    const maxFiles = 20;
-    if (input.files.length > maxFiles) {
-        alert(`Por favor, selecione no máximo ${maxFiles} arquivos.`);
-        input.value = '';
-    }
-}
