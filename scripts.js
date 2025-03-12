@@ -3,10 +3,8 @@ import supabase from './supabase-config.js';
 // Inicializa o EmailJS
 emailjs.init('SEU_USER_ID_DO_EMAILJS'); // Substitua pelo seu User ID do EmailJS
 
-document.getElementById('feedbackForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
-
-    console.log("Formulário enviado!");
+document.getElementById('feedbackForm').addEventListener('change', async function () {
+    console.log("Formulário alterado!");
 
     const files = document.getElementById('fileAttachments').files;
     const fileUrls = [];
@@ -51,10 +49,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
         const viewLink = `https://seu-usuario.github.io/seu-repositorio/view-report.html?id=${reportId}`; // Substitua pelo seu link do GitHub Pages
 
         // Envia o e-mail com o link de visualização
-        const emailParams = {
-            link: viewLink
-        };
-
+        const emailParams = { link: viewLink };
         await emailjs.send('SEU_SERVICE_ID_DO_EMAILJS', 'SEU_TEMPLATE_ID_DO_EMAILJS', emailParams); // Substitua pelos seus IDs do EmailJS
         console.log("E-mail enviado com sucesso!");
 
@@ -74,7 +69,6 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
 // Função para gerar o PDF
 document.getElementById('generatePdf').addEventListener('click', function () {
     const { jsPDF } = window.jspdf; // Inicializa o jsPDF
-
     const doc = new jsPDF();
 
     // Título do PDF
@@ -110,9 +104,9 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         doc.setFontSize(14);
         doc.text("Anexos:", 10, doc.autoTable.previous.finalY + 10);
 
-        files.forEach((file, index) => {
-            doc.text(`${index + 1}. ${file.name}`, 10, doc.autoTable.previous.finalY + 20 + (index * 10));
-        });
+        for (let index = 0; index < files.length; index++) {
+            doc.text(`${index + 1}. ${files[index].name}`, 10, doc.autoTable.previous.finalY + 20 + (index * 10));
+        }
     }
 
     // Abre o PDF em uma nova aba
