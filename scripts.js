@@ -26,7 +26,7 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     });
     
     doc.setFontSize(10);
-    doc.text(`Data de Geração: ${formattedDate} ${formattedTime}`, 10, 280); // Ajuste a posição para 10 no eixo X
+    doc.text(`Data de Geração: ${formattedDate} ${formattedTime}`, 10, 280); // Ajuste para não ultrapassar a margem
     
     doc.save("relatorio_tecnico.pdf");
 });
