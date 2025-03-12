@@ -5,11 +5,7 @@ const { jsPDF } = window.jspdf;
 document.getElementById('generatePdf').addEventListener('click', function () {
     const doc = new jsPDF();
 
-    // Adiciona a logo
-    const logoUrl = "https://via.placeholder.com/150x50?text=Logo+Teste";
-    doc.addImage(logoUrl, 'PNG', 20, 10, 40, 15); // Ajuste a posição e o tamanho da logo
-
-    // Título do PDF
+    // Cabeçalho do PDF
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(40, 40, 40);
@@ -33,30 +29,33 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         "Outras Observações": document.getElementById('otherObservations').value,
     };
 
-    // Converte os dados do formulário em uma lista
-    const data = Object.entries(formData).map(([key, value]) => ({ key, value }));
+    // Converte os dados do formulário em uma tabela
+    const data = Object.entries(formData).map(([key, value]) => [key, value]);
 
-    // Adiciona os dados ao PDF
-    let yPos = 40; // Posição inicial
-    data.forEach((item, index) => {
-        doc.setFontSize(12);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(40, 40, 40);
-        doc.text(`${item.key}:`, 20, yPos);
-
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(80, 80, 80);
-        doc.text(item.value, 70, yPos);
-
-        yPos += 10; // Espaçamento entre os itens
+    // Adiciona a tabela ao PDF
+    doc.autoTable({
+        head: [['Campo', 'Valor']],
+        body: data,
+        startY: 30,
+        theme: "striped", // Tema da tabela
+        headStyles: {
+            fillColor: [40, 40, 40], // Cor de fundo do cabeçalho
+            textColor: [255, 255, 255], // Cor do texto do cabeçalho
+            fontStyle: "bold", // Fonte em negrito
+        },
+        bodyStyles: {
+            textColor: [40, 40, 40], // Cor do texto do corpo
+        },
+        alternateRowStyles: {
+            fillColor: [245, 245, 245], // Cor de fundo das linhas alternadas
+        },
+        margin: { top: 30 }, // Margem superior
     });
 
-    // Rodapé do PDF (canto inferior direito)
+    // Rodapé do PDF
     doc.setFontSize(10);
     doc.setTextColor(100, 100, 100);
-    const footerText = `Gerado em: ${new Date().toLocaleString()}`;
-    const footerWidth = doc.getTextWidth(footerText);
-    doc.text(footerText, doc.internal.pageSize.width - footerWidth - 20, doc.internal.pageSize.height - 10);
+    doc.text("Gerado em: " + new Date().toLocaleString(), 20, doc.autoTable.previous.finalY + 10);
 
     // Abre o PDF em uma nova aba
     const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
