@@ -15,9 +15,11 @@ document.getElementById('generatePdf').addEventListener('click', function () {
     const secondaryColor = [100, 100, 100]; // Cor cinza
     const accentColor = [37, 117, 252]; // Azul moderno
 
+    // Define a fonte como "Courier" (máquina de escrever)
+    doc.setFont("courier");
+
     // Título do PDF (centralizado)
     doc.setFontSize(22);
-    doc.setFont("helvetica", "bold");
     doc.setTextColor(...primaryColor);
     const title = "Relatório Técnico Pós Evento";
     const titleWidth = doc.getTextWidth(title);
@@ -42,12 +44,10 @@ document.getElementById('generatePdf').addEventListener('click', function () {
     // Adiciona os dados ao PDF
     let yPosition = 40; // Posição inicial para os dados
     doc.setFontSize(14);
-    doc.setFont("helvetica", "bold");
     doc.setTextColor(...primaryColor);
 
     Object.entries(formData).forEach(([key, value]) => {
         doc.text(`${key}:`, 20, yPosition);
-        doc.setFont("helvetica", "normal");
         doc.setTextColor(...secondaryColor);
         doc.text(`${value}`, 80, yPosition);
         yPosition += 10; // Espaçamento entre linhas
@@ -63,7 +63,6 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         minute: '2-digit'
     });
     doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
     doc.setTextColor(...secondaryColor);
     doc.text(`Gerado em: ${formattedDate}`, pageWidth - 50, doc.internal.pageSize.getHeight() - 10);
 
