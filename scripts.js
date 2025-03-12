@@ -48,7 +48,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async functio
 
         // Gera o link de visualização
         const reportId = insertedData[0].id; // Supondo que o Supabase retorne o ID do registro
-        const viewLink = `https://seu-usuario.github.io/seu-repositorio/view-report.html?id=${reportId}`; // Substitua pelo seu link do GitHub Pages
+        const viewLink = `https://aglaessio.github.io/feedback_iw/view-report.html?id=${reportId}`; // Substitua pelo seu link do GitHub Pages
 
         // Envia o e-mail com o link de visualização
         const emailParams = {
