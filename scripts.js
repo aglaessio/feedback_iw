@@ -20,7 +20,7 @@ document.getElementById('generatePdf').addEventListener('click', function () {
 
     // Título do PDF (centralizado)
     doc.setFontSize(22);
-    doc.setTextColor(...primaryColor);
+    doc.setTextColor(...accentColor); // Cor azul moderna
     const title = "Relatório Técnico Pós Evento";
     const titleWidth = doc.getTextWidth(title);
     const pageWidth = doc.internal.pageSize.getWidth();
@@ -53,7 +53,7 @@ document.getElementById('generatePdf').addEventListener('click', function () {
         yPosition += 10; // Espaçamento entre linhas
     });
 
-    // Adiciona a data de geração no canto inferior direito
+    // Adiciona a data de geração no canto inferior direito (ajustado para não ultrapassar as margens)
     const date = new Date();
     const formattedDate = date.toLocaleDateString('pt-BR', {
         day: '2-digit',
@@ -64,7 +64,9 @@ document.getElementById('generatePdf').addEventListener('click', function () {
     });
     doc.setFontSize(12);
     doc.setTextColor(...secondaryColor);
-    doc.text(`Gerado em: ${formattedDate}`, pageWidth - 50, doc.internal.pageSize.getHeight() - 10);
+    const text = `Gerado em: ${formattedDate}`;
+    const textWidth = doc.getTextWidth(text);
+    doc.text(text, pageWidth - textWidth - 10, doc.internal.pageSize.getHeight() - 10);
 
     // Abre o PDF em uma nova aba
     const pdfOutput = doc.output('bloburl'); // Gera um URL para o PDF
