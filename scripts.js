@@ -5,10 +5,6 @@ const { jsPDF } = window.jspdf;
 document.getElementById('generatePdf').addEventListener('click', function () {
     const doc = new jsPDF();
 
-    // Adiciona a logo
-    const logoUrl = "logo-light.13bb4c96.png";
-    doc.addImage(logoUrl, 'PNG', 20, 10, 40, 15); // Ajuste a posição e o tamanho da logo
-
     // Título do PDF
     doc.setFontSize(18);
     doc.setFont("helvetica", "bold");
