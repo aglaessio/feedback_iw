@@ -17,7 +17,17 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     document.querySelectorAll(".form-group").forEach((group) => {
         const label = group.querySelector("label").innerText;
         const input = group.querySelector("input, select, textarea");
-        const value = input.value || "Não informado";
+        let value = input.value || "Não informado";
+        
+        // Formatação especial para "Data e Hora de Chegada"
+        if (input.id === "arrivalDateTime") {
+            const date = new Date(input.value);
+            if (!isNaN(date)) {
+                value = `${date.toLocaleDateString("pt-BR")} ${date.toLocaleTimeString("pt-BR")}`;
+            } else {
+                value = "Não informado";
+            }
+        }
         
         // Adiciona o rótulo e o valor ao PDF
         doc.setFontSize(12);
