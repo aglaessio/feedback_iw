@@ -6,58 +6,85 @@
     <title>Relatório Técnico Pós Evento</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Relatório Técnico Pós Evento</h1>
+        <h1>📋 RELATÓRIO TÉCNICO PÓS EVENTO</h1>
+        <p>Preencha os campos abaixo com as informações técnicas do evento:</p>
+        <hr>
+
         <form id="feedbackForm">
-            <div class="form-group">
-                <label for="eventName">Nome do Evento:</label>
-                <input type="text" id="eventName" name="eventName" required>
+            <!-- 1. INFORMAÇÕES GERAIS -->
+            <div class="section">
+                <h2><i class="fas fa-info-circle icon-blue"></i> 1. INFORMAÇÕES GERAIS</h2>
+                <div class="form-group">
+                    <label for="eventName">⦁ Nome do Evento:</label>
+                    <input type="text" id="eventName" name="eventName" required>
+                </div>
+                <div class="form-group">
+                    <label for="technicianName">⦁ Nome do Técnico:</label>
+                    <input type="text" id="technicianName" name="technicianName" required>
+                </div>
+                <div class="form-group">
+                    <label for="arrivalDateTime">⦁ Data e Hora de Chegada:</label>
+                    <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="technicianName">Nome do Técnico:</label>
-                <input type="text" id="technicianName" name="technicianName" required>
+            <hr>
+
+            <!-- 2. BILHETERIAS -->
+            <div class="section">
+                <h2><i class="fas fa-ticket-alt icon-purple"></i> 2. BILHETERIAS</h2>
+                <div class="form-group">
+                    <label for="boxOfficeOpeningTime">⦁ Horário de Abertura da Bilheteria:</label>
+                    <input type="time" id="boxOfficeOpeningTime" name="boxOfficeOpeningTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="boxOfficeCount">⦁ Quantidade de Bilheterias:</label>
+                    <input type="number" id="boxOfficeCount" name="boxOfficeCount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="boxOfficeEquipmentCount">⦁ Equipamentos de Bilheteria:</label>
+                    <input type="number" id="boxOfficeEquipmentCount" name="boxOfficeEquipmentCount" min="0" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="arrivalDateTime">Data e Hora de Chegada:</label>
-                <input type="datetime-local" id="arrivalDateTime" name="arrivalDateTime" required>
+            <hr>
+
+            <!-- 3. PORTARIAS -->
+            <div class="section">
+                <h2><i class="fas fa-door-open icon-green"></i> 3. PORTARIAS</h2>
+                <div class="form-group">
+                    <label for="gateOpeningTime">⦁ Horário de Abertura da Portaria:</label>
+                    <input type="time" id="gateOpeningTime" name="gateOpeningTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateCount">⦁ Quantidade de Portarias:</label>
+                    <input type="number" id="gateCount" name="gateCount" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="gateEquipmentCount">⦁ Equipamentos de Portaria:</label>
+                    <input type="number" id="gateEquipmentCount" name="gateEquipmentCount" min="0" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="boxOfficeOpeningTime">Horário de Abertura da Bilheteria:</label>
-                <input type="time" id="boxOfficeOpeningTime" name="boxOfficeOpeningTime" required>
+            <hr>
+
+            <!-- 4. OUTRAS INFORMAÇÕES -->
+            <div class="section">
+                <h2><i class="fas fa-wifi icon-red"></i> 4. OUTRAS INFORMAÇÕES</h2>
+                <div class="form-group">
+                    <label for="internetProvided">⦁ Internet Disponibilizada:</label>
+                    <select id="internetProvided" name="internetProvided" required>
+                        <option value="Sim">Sim</option>
+                        <option value="Não">Não</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="otherObservations">⦁ Outras Observações:</label>
+                    <textarea id="otherObservations" name="otherObservations" rows="4"></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="boxOfficeCount">Quantidade de Bilheterias:</label>
-                <input type="number" id="boxOfficeCount" name="boxOfficeCount" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="boxOfficeEquipmentCount">Equipamentos de Bilheteria:</label>
-                <input type="number" id="boxOfficeEquipmentCount" name="boxOfficeEquipmentCount" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="gateOpeningTime">Horário de Abertura da Portaria:</label>
-                <input type="time" id="gateOpeningTime" name="gateOpeningTime" required>
-            </div>
-            <div class="form-group">
-                <label for="gateCount">Quantidade de Portarias:</label>
-                <input type="number" id="gateCount" name="gateCount" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="gateEquipmentCount">Equipamentos de Portaria:</label>
-                <input type="number" id="gateEquipmentCount" name="gateEquipmentCount" min="0" required>
-            </div>
-            <div class="form-group">
-                <label for="internetProvided">Internet Disponibilizada:</label>
-                <select id="internetProvided" name="internetProvided" required>
-                    <option value="Sim">Sim</option>
-                    <option value="Não">Não</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="otherObservations">Outras Observações:</label>
-                <textarea id="otherObservations" name="otherObservations" rows="4"></textarea>
-            </div>
+
             <button type="button" id="generatePdf">Gerar PDF</button>
         </form>
     </div>
