@@ -82,5 +82,15 @@ document.getElementById("generatePdf").addEventListener("click", function () {
     doc.text(text, xPosition, 280); // 280 é a posição Y próxima ao rodapé
 
     // Salva o PDF
-    doc.save("relatorio_tecnico.pdf");
+    // Obter o nome do evento do campo "eventName"
+const eventName = document.getElementById("eventName").value;
+
+// Remover caracteres inválidos para nomes de arquivo (opcional)
+const sanitizedEventName = eventName.replace(/[^a-zA-Z0-9\s]/g, "").trim();
+
+// Definir o nome do arquivo PDF com base no nome do evento
+const fileName = sanitizedEventName ? `${sanitizedEventName}.pdf` : "relatorio_tecnico.pdf";
+
+// Salvar o PDF com o nome personalizado
+doc.save(fileName);
 });
