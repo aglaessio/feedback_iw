@@ -1,14 +1,10 @@
-📋 Formulário de Informações para o Evento
-Este projeto é um formulário técnico para coleta de informações pós-evento, desenvolvido em HTML, CSS e JavaScript. Ele permite que os usuários preencham detalhes sobre o evento, como recursos humanos, acessos, bilheterias, horários de funcionamento e outras necessidades. O formulário também inclui a funcionalidade de gerar um PDF com os dados preenchidos.
+Manual de Utilização do Formulário de Relatório Técnico Pós-Evento
+Este manual tem como objetivo guiar o usuário no preenchimento e utilização do formulário de relatório técnico pós-evento. O formulário foi desenvolvido para coletar informações técnicas sobre eventos, como recursos humanos, bilheterias, portarias, horários de funcionamento e outras necessidades. Além disso, ele permite a geração de um PDF com os dados preenchidos.
 
-🚀 Como usar
-Pré-requisitos
-Navegador moderno (Chrome, Firefox, Edge, etc.).
-
-Conexão com a internet (para carregar as fontes e bibliotecas externas).
-
-Instalação
+1. Como Acessar o Formulário
 Clone o repositório:
+
+Abra o terminal e execute o seguinte comando para clonar o repositório:
 
 bash
 Copy
@@ -18,97 +14,112 @@ Navegue até a pasta do projeto:
 bash
 Copy
 cd nome-do-repositorio
-Abra o arquivo index.html:
+Abra o formulário:
 
-Basta abrir o arquivo index.html no seu navegador.
+Abra o arquivo index.html no seu navegador (Chrome, Firefox, Edge, etc.).
 
-Como preencher o formulário
-Abra o arquivo index.html no navegador.
+2. Estrutura do Formulário
+O formulário está dividido em quatro seções principais:
 
-Preencha todos os campos do formulário:
+Informações Gerais:
 
-Recursos Humanos: Nome do técnico e número de técnicos necessários.
+Nome do Evento
 
-Acessos e Validações: Quantidade de portões e validações.
+Nome do Técnico
 
-Bilheterias e Guichês: Quantidade de bilheterias e guichês de venda.
+Data e Hora de Chegada
 
-Horários de Funcionamento: Horários de abertura da bilheteria e portaria.
+Bilheterias:
 
-Outras Necessidades: Informações sobre Wi-fi e outras observações.
+Horário de Abertura da Bilheteria
 
-Clique no botão "Gerar PDF" para baixar um arquivo PDF com os dados preenchidos.
+Quantidade de Bilheterias
 
-Funcionalidades
-Formulário interativo: Campos obrigatórios e validação básica.
+Quantidade de Equipamentos de Bilheteria
 
-Geração de PDF: Gera um PDF com os dados preenchidos no formulário.
+Portarias:
 
-Design responsivo: Funciona bem em dispositivos móveis, tablets e desktops.
+Horário de Abertura da Portaria
 
-🛠️ Tecnologias utilizadas
-HTML: Estrutura do formulário.
+Quantidade de Portarias
 
-CSS: Estilização do formulário e layout responsivo.
+Quantidade de Equipamentos de Portaria
 
-JavaScript: Lógica para gerar o PDF.
+Outras Informações:
 
-Bibliotecas externas:
+Internet Disponibilizada (Sim/Não)
 
-jsPDF: Para gerar o PDF.
+Outras Observações (campo de texto livre)
 
-Font Awesome: Para ícones.
+3. Como Preencher o Formulário
+Informações Gerais:
 
-Google Fonts: Para a fonte Roboto.
+Nome do Evento: Insira o nome completo do evento.
 
-📂 Estrutura do Projeto
-Copy
-formulario-evento/
-├── index.html          # Página principal do formulário
-├── styles.css          # Estilos CSS do projeto
-├── scripts.js          # Lógica JavaScript para gerar o PDF
-├── README.md           # Documentação do projeto
-🎨 Cores e Estilos
-Cores principais:
+Nome do Técnico: Insira o nome do técnico responsável.
 
-Azul: #2575fc
+Data e Hora de Chegada: Selecione a data e hora de chegada ao local do evento.
 
-Roxo: #6a11cb
+Bilheterias:
 
-Verde: #28a745
+Horário de Abertura da Bilheteria: Insira o horário em que a bilheteria foi aberta.
 
-Laranja: #fd7e14
+Quantidade de Bilheterias: Insira o número de bilheterias disponíveis.
 
-Vermelho: #dc3545
+Quantidade de Equipamentos de Bilheteria: Insira o número de equipamentos utilizados nas bilheterias.
 
-Fonte: Roboto (Google Fonts).
+Portarias:
 
-Ícones: Font Awesome.
+Horário de Abertura da Portaria: Insira o horário em que a portaria foi aberta.
 
-📄 Gerando o PDF
-O botão "Gerar PDF" utiliza a biblioteca jsPDF para criar um arquivo PDF com os dados preenchidos no formulário. O PDF inclui:
+Quantidade de Portarias: Insira o número de portarias disponíveis.
 
-Título do formulário.
+Quantidade de Equipamentos de Portaria: Insira o número de equipamentos utilizados nas portarias.
 
-Todas as seções e campos preenchidos.
+Outras Informações:
 
-Data e hora de geração no rodapé.
+Internet Disponibilizada: Selecione "Sim" ou "Não" para indicar se a internet foi disponibilizada durante o evento.
 
-📱 Responsividade
-O projeto foi desenvolvido com foco em responsividade, funcionando bem em:
+Outras Observações: Insira qualquer observação adicional que considere relevante.
 
-Celulares: Telas pequenas (até 480px).
+4. Como Gerar o PDF
+Preencha todos os campos obrigatórios:
 
-Tablets: Telas médias (até 768px).
+Todos os campos marcados com um asterisco (*) são obrigatórios. Certifique-se de que todos estão preenchidos corretamente.
 
-Desktops: Telas grandes (acima de 768px).
+Clique no botão "Gerar PDF":
 
-📝 Licença
-Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+Após preencher todos os campos, clique no botão "Gerar PDF" localizado no final do formulário.
 
-👨‍💻 Desenvolvedor
+Download do PDF:
+
+Um arquivo PDF será gerado automaticamente com todas as informações preenchidas. O arquivo será salvo com o nome baseado no "Nome do Evento". Por exemplo, se o nome do evento for "Festival de Música 2023", o arquivo será salvo como Festival de Música 2023.pdf.
+
+5. Funcionalidades Adicionais
+Validação de Campos: O formulário valida se todos os campos obrigatórios foram preenchidos antes de gerar o PDF.
+
+Design Responsivo: O formulário é responsivo e funciona bem em dispositivos móveis, tablets e desktops.
+
+Ícones e Cores: Ícones coloridos e um design moderno facilitam a identificação das seções.
+
+6. Dicas e Observações
+Campos Obrigatórios: Certifique-se de preencher todos os campos obrigatórios para evitar erros ao gerar o PDF.
+
+Data e Hora: Ao preencher a data e hora de chegada, utilize o formato correto (dia/mês/ano e hora:minuto).
+
+Observações: Utilize o campo "Outras Observações" para incluir informações adicionais que possam ser relevantes para o relatório.
+
+7. Suporte e Contato
+Em caso de dúvidas ou problemas, entre em contato com o desenvolvedor:
+
 Nome: [Seu Nome]
 
-GitHub: Seu GitHub
+GitHub: [Seu GitHub]
 
 E-mail: [seu-email@exemplo.com]
+
+8. Licença
+Este projeto está sob a licença MIT. Consulte o arquivo LICENSE para mais detalhes.
+
+9. Considerações Finais
+Este formulário foi desenvolvido para facilitar a coleta de informações técnicas pós-evento, garantindo que todos os dados sejam organizados e disponibilizados em um formato PDF de fácil leitura e compartilhamento. Utilize-o conforme necessário e sinta-se à vontade para sugerir melhorias ou personalizações.
